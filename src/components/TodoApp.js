@@ -47,12 +47,12 @@ export default class TodoApp extends React.Component {
       if (options) {
         this.setState(() => ({ options }));
       }
-    } catch (e) {}
+    } catch (e) { }
   }
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps,prevState) {
     if (prevState.options.length !== this.state.options.length) {
       const json = JSON.stringify(this.state.options);
-      localStorage.setItem("options", json);
+      localStorage.setItem("options",json);
     }
   }
   render() {
@@ -60,21 +60,25 @@ export default class TodoApp extends React.Component {
 
     return (
       <div>
-        <Header subtitle={subtitle} />
-        <Action
-          hasOptions={this.state.options.length > 0}
-          handlePick={this.handlePick}
-        />
-        <Options
-          options={this.state.options}
-          handleDeleteOptions={this.handleDeleteOptions}
-          handleDeleteOption={this.handleDeleteOption}
-        />
-        <AddOption handleAddOption={this.handleAddOption} />
-        <OptionModal
-          selectedOption={this.state.selectedOption}
-          handleClearSelectedOption={this.handleClearSelectedOption}
-        />
+        <Header subtitle={ subtitle } />
+        <div className="container">
+          <Action
+            hasOptions={ this.state.options.length > 0 }
+            handlePick={ this.handlePick }
+          />
+          <div className="widget">
+            <Options
+              options={ this.state.options }
+              handleDeleteOptions={ this.handleDeleteOptions }
+              handleDeleteOption={ this.handleDeleteOption }
+            />
+            <AddOption handleAddOption={ this.handleAddOption } />
+          </div>
+          <OptionModal
+            selectedOption={ this.state.selectedOption }
+            handleClearSelectedOption={ this.handleClearSelectedOption }
+          />
+        </div>
       </div>
     );
   }
